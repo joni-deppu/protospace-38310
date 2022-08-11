@@ -14,6 +14,10 @@ class PrototypesController < ApplicationController
     else
       render :new
     end
+
+    def show
+      
+    end
   end
     private
   def prototype_params
