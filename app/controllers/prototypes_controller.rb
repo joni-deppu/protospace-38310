@@ -18,13 +18,13 @@ class PrototypesController < ApplicationController
     end
 
     def show
-      @prototype = Prototype.find(params[:id])
+      # @prototype = Prototype.find(params[:id])
       # @prototype = Prototype.find(params[:prototype.id])
       # @prototype = Prototype.find(params[:prototype_id])
       # @prototype = Prototype.find(params[:prototypes.id])
       # @prototype = Prototype.find(params[:prototypes_id])
-      # user = User.find(params[:id])
-      # @prototypes = user.prototypes
+      user = User.find(params[:id])
+      @prototypes = user.prototypes
     end
   end
 
