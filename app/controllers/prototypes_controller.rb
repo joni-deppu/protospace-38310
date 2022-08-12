@@ -16,6 +16,7 @@ class PrototypesController < ApplicationController
     else
       render :new
     end
+  end
 
     def show
       @prototype = Prototype.find(params[:id])
@@ -28,13 +29,18 @@ class PrototypesController < ApplicationController
     end
 
     def edit
-      
+      @prototype = Prototype.find(params[:id])
     end
 
     def update
-      
+      prototype = Prototype.find(params[:id])
+      if prototype.update(prototype_params)
+        redirect_to root_path
+      else
+        render :edit
+        # edit画面にはいくけど空欄　元々edit画面が空欄だったからだと思われる
+      end
     end
-  end
 
   private
   def prototype_params
