@@ -32,7 +32,7 @@
       </div>
       <div class="prototype__comments">
         <%# ログインしているユーザーには以下のコメント投稿フォームを表示する %>
-        <% if user_signed_in? && current_user.id == @prototype.user_id %>
+        <% if user_signed_in? %>
         <%= form_with model: [@prototype, @comment],local: true do |f|%>
             <div class="field">
                <%= f.label :content, "コメント" %><br />
@@ -48,10 +48,10 @@
           <%# 投稿に紐づくコメントを一覧する処理を記述する %>
             <li class="comments_list">
               <%= @comments.each do |comment|%>
-              <%= link_to comment.user.name, user_path(:id), class: :comment_user %>
+              <%= link_to comment.user.name, "/users/#{comment.user_id}", class: :comment_user %>
               <%= comment.content %>
-              <% end %>
             </li>
+            <% end %>
           <%# // 投稿に紐づくコメントを一覧する処理を記述する %>
         </ul>
       </div>
