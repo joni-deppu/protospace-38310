@@ -2,7 +2,6 @@ class PrototypesController < ApplicationController
 
   def index
     @prototypes = Prototype.all
-    # @prototypes = Prototype.includes(:user)
   end
     
   def new
@@ -11,43 +10,39 @@ class PrototypesController < ApplicationController
 
   def create
     @prototype = Prototype.new(prototype_params)
-    if @prototype.save
-      redirect_to root_path
+      if @prototype.save
+        redirect_to root_path
+      else
+        render :new
+      end
+  end
+
+  def show
+    @prototype = Prototype.find(params[:id])
+    @comment = Comment.new 
+    @comments = @prototype.comments.includes(:user)
+  end
+
+  def edit
+    @prototype = Prototype.find(params[:id])
+  end
+
+  def update
+    prototype = Prototype.find(params[:id])
+    if prototype.update(prototype_params)
+      redirect_to prototype_path(prototype.id)
     else
-      render :new
+      render :edit
+      # edit画面にはいくけど空欄　元々edit画面が空欄だったからだと思われる
+      #　普通にダメだった。とりあえず、後で修正するとして、editは仮置き
     end
   end
 
-    def show
-      @prototype = Prototype.find(params[:id])
-      # @prototype = Prototype.find(params[:prototype.id])
-      # @prototype = Prototype.find(params[:prototype_id])
-      # @prototype = Prototype.find(params[:prototypes.id])
-      # @prototype = Prototype.find(params[:prototypes_id])
-      # user = User.find(params[:id])
-      # @prototypes = user.prototypes
-    end
-
-    def edit
-      @prototype = Prototype.find(params[:id])
-    end
-
-    def update
-      prototype = Prototype.find(params[:id])
-      if prototype.update(prototype_params)
-        redirect_to prototype_path(prototype.id)
-      else
-        render :edit
-        # edit画面にはいくけど空欄　元々edit画面が空欄だったからだと思われる
-        #　普通にダメだった。とりあえず、後で修正するとして、editは仮置き
-      end
-    end
-
-      def destroy
-        prototype = Prototype.find(params[:id])
-        prototype.destroy
-        redirect_to root_path        
-      end
+  def destroy
+    prototype = Prototype.find(params[:id])
+    prototype.destroy
+    redirect_to root_path        
+  end
 
   private
   def prototype_params
