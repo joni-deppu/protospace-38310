@@ -1,9 +1,10 @@
 class CommentsController < ApplicationController
   def create
-    if comment = Comment.create(comment_params)
-       redirect_to "/prototypes/show"
+    # if comment = Comment.create(comment_params)
+    if Comment.create(comment_params)
+    redirect_to root_path
     else
-      render "/prototypes/show"
+      render root_path
     end
   end
 
