@@ -40,11 +40,13 @@ class PrototypesController < ApplicationController
         render :edit
         # edit画面にはいくけど空欄　元々edit画面が空欄だったからだと思われる
       end
+    end
 
       def destroy
-        
+        prototype = Prototype.find(params[:id])
+        prototype.destroy
+        redirect_to root_path        
       end
-    end
 
   private
   def prototype_params
