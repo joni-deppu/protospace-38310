@@ -40,6 +40,10 @@ class PrototypesController < ApplicationController
         render :edit
         # edit画面にはいくけど空欄　元々edit画面が空欄だったからだと思われる
       end
+
+      def destroy
+        
+      end
     end
 
   private
