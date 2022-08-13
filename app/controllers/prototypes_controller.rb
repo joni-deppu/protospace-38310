@@ -3,6 +3,7 @@ class PrototypesController < ApplicationController
 
   def index
     @prototypes = Prototype.includes(:user)
+    # @prototypes = Prototype.all
   end
     
   def new
