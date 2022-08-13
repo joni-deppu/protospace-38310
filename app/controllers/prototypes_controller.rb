@@ -1,5 +1,5 @@
 class PrototypesController < ApplicationController
-  before_action :set_prototype, only: [:edit, :show]
+  before_action :set_prototype, only: [:edit, :show, :update]
 
   def index
     @prototypes = Prototype.includes(:user)
@@ -27,7 +27,6 @@ class PrototypesController < ApplicationController
   end
 
   def update
-    @prototype = Prototype.find(params[:id])
     if @prototype.update(prototype_params)
       redirect_to prototype_path(@prototype.id)
     else
@@ -47,6 +46,6 @@ class PrototypesController < ApplicationController
   end
 
   def set_prototype
-  @prototype = Prototype.find(params[:id])
+    @prototype = Prototype.find(params[:id])
   end
 end
