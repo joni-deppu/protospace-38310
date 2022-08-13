@@ -1,8 +1,7 @@
 class CommentsController < ApplicationController
   def create
-    # if comment = Comment.create(comment_params)
     if Comment.create(comment_params)
-    redirect_to root_path
+    redirect_to prototype_path(prototype.id)
     else
       render root_path
     end
